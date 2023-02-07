@@ -43,6 +43,18 @@ class Lexer:
       
       return Token(TokenType.DIVIDE, "", pos)
     
+    elif self.ch() == "(":
+      pos = self.cursor
+      self.next_char()
+      
+      return Token(TokenType.LPAREN, "", pos)
+    
+    elif self.ch() == ")":
+      pos = self.cursor
+      self.next_char()
+      
+      return Token(TokenType.RPAREN, "", pos)
+    
     elif self.ch() in DIGITS or self.ch() == ".":
       pos = self.cursor
       
@@ -64,7 +76,7 @@ class Lexer:
       return Token(TokenType.NUM, vl, pos)
     
     else:
-      util.print_error(self.cursor, "Unknown token")
+      util.print_error(self.cursor, "Unknown token.")
       return None
 
 def lex(l: Lexer):
