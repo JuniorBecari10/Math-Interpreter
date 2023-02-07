@@ -17,6 +17,9 @@ def main():
     p = parser_.Parser(tks)
     tree = p.parse()
     
+    if tree == None:
+      continue
+    
     print(tree)
 
 if __name__ == "__main__":

@@ -1,5 +1,6 @@
 from tokens import *
 from nodes import *
+import util
 
 class Parser:
   def __init__(self, tokens):
@@ -53,11 +54,17 @@ class Parser:
       self.next_token()
       res = self.parse()
       
-      if tk.type == TokenType.RPAREN:
+      # the parser still can parse it but let's forbid it
+      if tk.type != TokenType.RPAREN:
         util.print_error(tk.pos, "Unclosed parenthesis.")
+        return None
       
       self.next_token()
       return res
+    
+    elif tk.type == TokenType.RPAREN:
+      util.print_error(tk.pos, "Unopened parenthesis.")
+      return None
     
     elif tk.type == TokenType.NUM:
       self.next_token()
