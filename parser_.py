@@ -49,7 +49,17 @@ class Parser:
   def factor(self):
     tk = self.tk
     
-    if tk.type == TokenType.NUM:
+    if tk.type == TokenType.LPAREN:
+      self.next_token()
+      res = self.parse()
+      
+      if tk.type == TokenType.RPAREN:
+        util.print_error(tk.pos, "Unclosed parenthesis.")
+      
+      self.next_token()
+      return res
+    
+    elif tk.type == TokenType.NUM:
       self.next_token()
       
       return NumberNode(tk.value)
