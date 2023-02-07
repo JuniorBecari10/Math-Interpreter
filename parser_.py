@@ -55,9 +55,9 @@ class Parser:
       res = self.parse()
       
       # the parser still can parse it but let's forbid it
-      if tk.type != TokenType.RPAREN:
-        util.print_error(tk.pos, "Unclosed parenthesis.")
-        return None
+      #if tk.type != TokenType.RPAREN:
+      #  util.print_error(tk.pos, "Unclosed parenthesis.")
+      #  return None
       
       self.next_token()
       return res
