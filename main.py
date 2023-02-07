@@ -25,7 +25,8 @@ def main():
       i = interpreter.Interpreter()
       value = i.visit(tree)
       
-      print(f"< {value}")
+      if value != None:
+        print(f"< {value}")
     except Exception as e:
       print(e)
 

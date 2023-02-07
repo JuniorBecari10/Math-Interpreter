@@ -1,5 +1,6 @@
 from nodes import *
 from values import Number
+import util
 
 class Interpreter:
   def visit(self, node):
@@ -28,7 +29,7 @@ class Interpreter:
       util.print_error(None, "Cannot divide by zero.")
   
   def visit_PlusNode(self, node):
-    return self.visit(node.node)
+    return self.visit(node.node).value
   
   def visit_MinusNode(self, node):
-    return Number(-self.visit(node.node))
+    return Number(-self.visit(node.node).value)
