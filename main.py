@@ -4,6 +4,9 @@ def main():
   while True:
     inp = input("> ")
     
+    if inp == "":
+      continue
+    
     l = lexer.Lexer(inp)
     tks = lexer.lex(l)
     

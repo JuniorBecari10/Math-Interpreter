@@ -16,10 +16,34 @@ class Lexer:
     return self.exp[self.cursor] if self.cursor < len(self.exp) else "\0"
   
   def next_token(self) -> Token:
-    if self.ch() in WHITESPACE:
+    while self.ch() in WHITESPACE:
       self.next_char()
     
-    if self.ch() in DIGITS or self.ch() == ".":
+    if self.ch() == "+":
+      pos = self.cursor
+      self.next_char()
+      
+      return Token(TokenType.PLUS, "", pos)
+    
+    elif self.ch() == "-":
+      pos = self.cursor
+      self.next_char()
+      
+      return Token(TokenType.MINUS, "", pos)
+    
+    elif self.ch() == "*":
+      pos = self.cursor
+      self.next_char()
+      
+      return Token(TokenType.TIMES, "", pos)
+    
+    elif self.ch() == "/":
+      pos = self.cursor
+      self.next_char()
+      
+      return Token(TokenType.DIVIDE, "", pos)
+    
+    elif self.ch() in DIGITS or self.ch() == ".":
       pos = self.cursor
       
       while self.ch() in DIGITS or self.ch() == ".":
@@ -34,10 +58,14 @@ class Lexer:
           count += 1
       
       if count > 1:
-        util.print_error(pos, "Number with more than 1 dot")
+        util.print_error(pos, "Number with more than 1 dot.")
         return None
       
       return Token(TokenType.NUM, vl, pos)
+    
+    else:
+      util.print_error(self.cursor, "Unknown token")
+      return None
 
 def lex(l: Lexer):
   tks = []
