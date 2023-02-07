@@ -47,8 +47,19 @@ class Parser:
     return res
   
   def factor(self):
-    if self.tk.type == TokenType.NUM:
-      tk = self.tk
+    tk = self.tk
+    
+    if tk.type == TokenType.NUM:
       self.next_token()
       
       return NumberNode(tk.value)
+    
+    elif tk.type == TokenType.PLUS:
+      self.next_token()
+      
+      return PlusNode(self.factor())
+    
+    elif tk.type == TokenType.MINUS:
+      self.next_token()
+      
+      return MinusNode(self.factor())

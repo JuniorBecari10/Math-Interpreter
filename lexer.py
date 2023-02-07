@@ -73,6 +73,11 @@ class Lexer:
         util.print_error(pos, "Number with more than 1 dot.")
         return None
       
+      try:
+        vl = float(vl)
+      except Exception:
+        util.print_error(pos, "Couldn't parse token as a number.")
+      
       return Token(TokenType.NUM, vl, pos)
     
     else:
